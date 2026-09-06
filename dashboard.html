@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحتي | زاد ZAD</title>
+<meta name="description" content="لوحتك الشخصية على منصة زاد: وحداتك المحفوظة، تقدّمك، وتوصيات حسب مسارك.">
+
+<!-- Link preview — card at assets/og-cover.jpg.
+     This page is private (noindex), but a shared link still shows the brand. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="زاد · ZAD">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:url" content="https://zad-it.netlify.app/dashboard.html">
+<meta property="og:title" content="زاد | ZAD — منصة تكنولوجيا المعلومات BTEC">
+<meta property="og:description" content="منصة زاد التعليمية لتخصص تكنولوجيا المعلومات BTEC.">
+<meta property="og:image" content="https://zad-it.netlify.app/assets/og-cover.jpg">
+<meta property="og:image:secure_url" content="https://zad-it.netlify.app/assets/og-cover.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="منصة زاد التعليمية — IT BTEC">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zad-it.netlify.app/assets/og-cover.jpg">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07050f">
+
+<!-- Boot: applies the saved theme and language BEFORE the first paint, so
+     moving between pages never flashes the wrong colours or flips direction.
+     Keep it inline and synchronous — an external file would load too late. -->
+<script>
+(function(){
+  try{
+    var d = document.documentElement;
+    var t = localStorage.getItem('zad-theme') === 'light' ? 'light' : 'dark';
+    var l = localStorage.getItem('zad-lang')  === 'en'    ? 'en'    : 'ar';
+    d.setAttribute('data-theme', t);
+    d.setAttribute('lang', l);
+    d.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', t === 'light' ? '#fdf8fb' : '#07050f');
+  }catch(e){ /* private mode: fall back to the markup defaults */ }
+})();
+</script>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c3aed'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Arabic: Thmanyah Sans (community web build of خط ثمانية, jsDelivr).
+     Latin + mono stay on Google Fonts. Cairo is kept only as a fallback
+     name in the CSS stack, not downloaded. -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dawod/thmanyah-font-web/sans.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/zad.css">
+
+<!-- warm the next page so the first jump to it is instant too -->
+<link rel="prefetch" href="index.html">
+<link rel="prefetch" href="quiz.html">
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<header class="nav">
+  <a class="brand" href="index.html">
+    <div class="mark">Z</div>
+    <div>
+      <div class="brand-ar" data-ar-only>زاد</div>
+      <div class="brand-en">ZAD</div>
+    </div>
+  </a>
+  <nav class="nav-links" id="nav-links">
+    <a href="index.html"         data-i18n="nav_home"></a>
+    <a href="index.html#majors"  data-i18n="nav_majors"></a>
+    <a href="index.html#courses" data-i18n="nav_courses"></a>
+    <a href="quiz.html"          data-i18n="nav_quiz"></a>
+    <a href="glossary.html"      data-i18n="nav_glossary"></a>
+    <!-- language picker: lives inside the burger menu on small screens -->
+    <div class="nav-menu-lang">
+      <span class="nml-label" data-i18n="nav_lang"></span>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang-btn="ar">AR</button>
+        <button type="button" data-lang-btn="en">EN</button>
+      </div>
+    </div>
+
+  </nav>
+  <div class="nav-right">
+    <div class="lang-toggle nav-lang-desktop" role="group" aria-label="Language">
+      <button type="button" data-lang-btn="ar">AR</button>
+      <button type="button" data-lang-btn="en">EN</button>
+    </div>
+    <div data-auth-slot></div>
+    <button class="nav-burger" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu" data-i18n-attr="aria-label:nav_menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ==================== LOADING ==================== -->
+<div class="dash" id="dash-loading">
+  <div class="dash-head">
+    <div class="skeleton" style="inline-size:74px;block-size:74px;border-radius:22px"></div>
+    <div style="flex:1">
+      <div class="skeleton" style="block-size:24px;max-inline-size:240px;margin-block-end:10px"></div>
+      <div class="skeleton" style="block-size:14px;max-inline-size:340px"></div>
+    </div>
+  </div>
+  <div class="stat-row">
+    <div class="skeleton" style="block-size:96px"></div>
+    <div class="skeleton" style="block-size:96px"></div>
+    <div class="skeleton" style="block-size:96px"></div>
+    <div class="skeleton" style="block-size:96px"></div>
+  </div>
+</div>
+
+<!-- ==================== SIGNED OUT ==================== -->
+<div class="dash" id="dash-guest" hidden>
+  <div class="card edge-glow text-center" style="max-inline-size:520px;margin-inline:auto;margin-block-start:8vh">
+    <div class="major-icon" style="--accent:var(--p-400);margin-inline:auto;margin-block-end:18px" id="guest-icon"></div>
+    <h2 style="font-size:22px;margin-block-end:10px" data-i18n="dash_guest_t"></h2>
+    <p style="color:var(--muted);margin-block-end:24px" data-i18n="dash_guest_p"></p>
+    <div style="display:flex;gap:11px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn-primary" href="signin.html"><span data-i18n="nav_signin"></span></a>
+      <a class="btn btn-ghost" href="index.html"><span data-i18n="nav_home"></span></a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== DASHBOARD ==================== -->
+<main class="dash" id="dash-main" hidden>
+
+  <section class="dash-head reveal">
+    <div class="avatar" id="dash-avatar">?</div>
+    <div style="flex:1;min-inline-size:220px">
+      <h1><span data-i18n="dash_hi"></span> <span id="dash-name"></span></h1>
+      <div class="who" id="dash-email"></div>
+      <div class="who-tags" id="dash-tags"></div>
+    </div>
+  </section>
+
+  <section class="stat-row">
+    <div class="stat-card reveal" data-delay="1">
+      <div class="k" data-i18n="dash_saved"></div>
+      <div class="v" id="kpi-saved">0</div>
+    </div>
+    <div class="stat-card reveal" data-delay="2">
+      <div class="k" data-i18n="dash_progress"></div>
+      <div class="v"><span id="kpi-progress">0</span><small>%</small></div>
+    </div>
+    <div class="stat-card reveal" data-delay="3">
+      <div class="k" data-i18n="dash_done"></div>
+      <div class="v" id="kpi-done">0</div>
+    </div>
+    <div class="stat-card reveal" data-delay="4">
+      <div class="k" data-i18n="dash_available"></div>
+      <div class="v" id="kpi-pathway">0</div>
+    </div>
+  </section>
+
+  <div class="dash-grid">
+    <div style="display:flex;flex-direction:column;gap:20px">
+
+      <!-- deadlines -->
+      <section class="panel reveal">
+        <div class="panel-head">
+          <h3 data-i18n="dash_deadlines"></h3>
+          <span class="tag" id="deadline-count"></span>
+        </div>
+        <div class="panel-body" id="deadline-list"></div>
+      </section>
+
+      <!-- quiz mastery -->
+      <section class="panel reveal">
+        <div class="panel-head">
+          <h3 data-i18n="dash_mastery"></h3>
+          <a class="btn btn-soft btn-sm" href="quiz.html"><span data-i18n="dash_take_quiz"></span></a>
+        </div>
+        <div class="panel-body" id="mastery-list"></div>
+      </section>
+
+      <!-- study plan -->
+      <section class="panel reveal">
+        <div class="panel-head"><h3 data-i18n="plan_title"></h3></div>
+        <div class="panel-body">
+          <p class="panel-lede" data-i18n="plan_sub"></p>
+          <div class="field-row">
+            <div class="field">
+              <label for="plan-date" data-i18n="plan_date"></label>
+              <input class="input" type="date" id="plan-date">
+            </div>
+            <div class="field">
+              <label for="plan-major" data-i18n="f_major"></label>
+              <select class="select" id="plan-major"></select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="plan-hours" data-i18n="plan_hours"></label>
+            <input class="input" type="number" id="plan-hours" min="1" max="40" value="6">
+          </div>
+          <button class="btn btn-primary btn-block" type="button" id="plan-make">
+            <span data-i18n="plan_make"></span>
+          </button>
+          <div id="plan-out"></div>
+        </div>
+      </section>
+
+      <!-- saved units -->
+      <section class="panel reveal">
+        <div class="panel-head">
+          <h3 data-i18n="dash_my_saved"></h3>
+          <a class="btn btn-soft btn-sm" href="index.html#courses"><span data-i18n="dash_browse"></span></a>
+        </div>
+        <div class="panel-body" id="saved-list"></div>
+      </section>
+
+      <!-- progress -->
+      <section class="panel reveal">
+        <div class="panel-head"><h3 data-i18n="dash_my_prog"></h3></div>
+        <div class="panel-body" id="progress-list"></div>
+      </section>
+
+      <!-- recommended -->
+      <section class="panel reveal">
+        <div class="panel-head"><h3 data-i18n="dash_recommend"></h3></div>
+        <div class="panel-body" id="reco-list"></div>
+      </section>
+    </div>
+
+    <aside style="display:flex;flex-direction:column;gap:20px">
+
+    <!-- share card -->
+    <section class="panel reveal">
+      <div class="panel-head"><h3 data-i18n="share_title"></h3></div>
+      <div class="panel-body">
+        <p class="panel-lede" data-i18n="share_sub"></p>
+        <canvas id="share-canvas" width="1000" height="560" class="share-canvas"></canvas>
+        <button class="btn btn-primary btn-block" type="button" id="share-dl">
+          <span data-i18n="share_dl"></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- classes -->
+    <section class="panel reveal">
+      <div class="panel-head"><h3 data-i18n="class_title"></h3></div>
+      <div class="panel-body" id="class-body"></div>
+    </section>
+
+    <!-- profile -->
+    <section class="panel reveal" data-delay="2">
+      <div class="panel-head"><h3 data-i18n="dash_profile"></h3></div>
+      <div class="panel-body">
+        <form id="profile-form" novalidate>
+          <div class="field">
+            <label for="pf-name" data-i18n="f_fullname"></label>
+            <input class="input" type="text" id="pf-name" data-i18n-attr="placeholder:f_fullname_p">
+          </div>
+          <div class="field">
+            <label for="pf-username" data-i18n="f_username"></label>
+            <input class="input" type="text" id="pf-username" data-i18n-attr="placeholder:f_username_p">
+          </div>
+          <div class="field">
+            <label for="pf-major" data-i18n="f_major"></label>
+            <select class="select" id="pf-major"></select>
+          </div>
+          <div class="field">
+            <label for="pf-level" data-i18n="f_level"></label>
+            <select class="select" id="pf-level"></select>
+          </div>
+          <div class="field">
+            <label for="pf-year" data-i18n="f_year"></label>
+            <select class="select" id="pf-year"></select>
+          </div>
+          <div class="field">
+            <label for="pf-school" data-i18n="f_school"></label>
+            <input class="input" type="text" id="pf-school" data-i18n-attr="placeholder:f_school_p">
+          </div>
+          <div class="field">
+            <label for="pf-country" data-i18n="f_country"></label>
+            <select class="select" id="pf-country"></select>
+          </div>
+          <div class="field">
+            <label data-i18n="f_interests"></label>
+            <div class="chip-select" id="pf-interests"></div>
+          </div>
+          <div class="field">
+            <label for="pf-bio" data-i18n="f_bio"></label>
+            <textarea class="textarea" id="pf-bio" maxlength="400"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="pf-display" data-i18n="f_display"></label>
+            <input class="input" type="text" id="pf-display" maxlength="24"
+                   data-i18n-attr="placeholder:f_display_p">
+            <span class="hint" data-i18n="f_display_hint"></span>
+          </div>
+          <label class="switch-row">
+            <input type="checkbox" id="pf-leaderboard">
+            <span data-i18n="f_leaderboard"></span>
+          </label>
+
+          <button class="btn btn-primary btn-block" type="submit" id="pf-submit">
+            <span data-i18n="btn_save"></span>
+          </button>
+        </form>
+      </div>
+    </section>
+    </aside>
+  </div>
+</main>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="assets/js/config.js"></script>
+<script defer src="assets/js/supabase.js"></script>
+<script defer src="assets/js/i18n.js"></script>
+<script defer src="assets/js/data.js"></script>
+<script defer src="assets/js/resources.js"></script>
+<script defer src="assets/js/stats.js"></script>
+<script defer src="assets/js/ui.js"></script>
+<script defer src="assets/js/auth.js"></script>
+<script defer src="assets/js/userdata.js"></script>
+<script defer src="assets/js/shell.js"></script>
+<script defer src="assets/js/sheets.js"></script>
+<script defer src="assets/js/app-dashboard.js"></script>
+</body>
+</html>

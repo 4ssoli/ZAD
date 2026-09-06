@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الاختبارات | زاد ZAD</title>
+<meta name="description" content="اختبر معلوماتك في كل مسارات تخصص تكنولوجيا المعلومات BTEC: اختبار سريع، وضع الامتحان، تحدي اليوم، بطاقات تعليمية، واختبار تحديد المسار المناسب لك.">
+<meta name="author" content="Rayan Assoli">
+<meta name="theme-color" content="#07050f">
+
+<!-- Boot: applies the saved theme and language BEFORE the first paint, so
+     moving between pages never flashes the wrong colours or flips direction.
+     Keep it inline and synchronous — an external file would load too late. -->
+<script>
+(function(){
+  try{
+    var d = document.documentElement;
+    var t = localStorage.getItem('zad-theme') === 'light' ? 'light' : 'dark';
+    var l = localStorage.getItem('zad-lang')  === 'en'    ? 'en'    : 'ar';
+    d.setAttribute('data-theme', t);
+    d.setAttribute('lang', l);
+    d.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', t === 'light' ? '#fdf8fb' : '#07050f');
+  }catch(e){ /* private mode: fall back to the markup defaults */ }
+})();
+</script>
+
+<!-- Link preview — card at assets/og-cover.jpg (see index.html for notes) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="زاد · ZAD">
+<meta property="og:locale" content="ar_AR">
+<link rel="canonical" href="https://zad-it.netlify.app/quiz.html">
+<meta property="og:url" content="https://zad-it.netlify.app/quiz.html">
+<meta property="og:title" content="اختبارات زاد — IT BTEC">
+<meta property="og:description" content="١٣٥ سؤالًا في ٩ مسارات، مع شرح لكل إجابة: اختبار سريع، وضع الامتحان، تحدي يومي، وبطاقات مراجعة.">
+<meta property="og:image" content="https://zad-it.netlify.app/assets/og-cover.jpg">
+<meta property="og:image:secure_url" content="https://zad-it.netlify.app/assets/og-cover.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="منصة زاد التعليمية — IT BTEC">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="اختبارات زاد — IT BTEC">
+<meta name="twitter:description" content="١٣٥ سؤالًا في ٩ مسارات، مع شرح لكل إجابة.">
+<meta name="twitter:image" content="https://zad-it.netlify.app/assets/og-cover.jpg">
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c3aed'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Arabic: Thmanyah Sans (community web build of خط ثمانية, jsDelivr).
+     Latin + mono stay on Google Fonts. Cairo is kept only as a fallback
+     name in the CSS stack, not downloaded. -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dawod/thmanyah-font-web/sans.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/zad.css">
+
+<!-- warm the next page so the first jump to it is instant too -->
+<link rel="prefetch" href="glossary.html">
+<link rel="prefetch" href="index.html">
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<header class="nav">
+  <a class="brand" href="index.html">
+    <div class="mark">Z</div>
+    <div>
+      <div class="brand-ar" data-ar-only>زاد</div>
+      <div class="brand-en">ZAD</div>
+    </div>
+  </a>
+
+  <nav class="nav-links" id="nav-links">
+    <a href="index.html"          data-i18n="nav_home"></a>
+    <a href="index.html#majors"   data-i18n="nav_majors"></a>
+    <a href="index.html#courses"  data-i18n="nav_courses"></a>
+    <a href="quiz.html" class="active" data-i18n="nav_quiz"></a>
+    <a href="glossary.html"       data-i18n="nav_glossary"></a>
+    <div class="nav-menu-lang">
+      <span class="nml-label" data-i18n="nav_lang"></span>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang-btn="ar">AR</button>
+        <button type="button" data-lang-btn="en">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="nav-right">
+    <div class="lang-toggle nav-lang-desktop" role="group" aria-label="Language">
+      <button type="button" data-lang-btn="ar">AR</button>
+      <button type="button" data-lang-btn="en">EN</button>
+    </div>
+    <div data-auth-slot></div>
+    <button class="nav-burger" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu" data-i18n-attr="aria-label:nav_menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ==================== APP ==================== -->
+<main class="quiz-wrap" id="quiz-app">
+  <div class="quiz-boot">
+    <div class="skeleton" style="block-size:120px;border-radius:20px"></div>
+    <div class="skeleton" style="block-size:220px;border-radius:20px;margin-block-start:16px"></div>
+  </div>
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer id="site-footer"></footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="assets/js/config.js"></script>
+<script defer src="assets/js/supabase.js"></script>
+<script defer src="assets/js/i18n.js"></script>
+<script defer src="assets/js/data.js"></script>
+<script defer src="assets/js/quiz-data.js"></script>
+<script defer src="assets/js/stats.js"></script>
+<script defer src="assets/js/ui.js"></script>
+<script defer src="assets/js/auth.js"></script>
+<script defer src="assets/js/userdata.js"></script>
+<script defer src="assets/js/shell.js"></script>
+<script defer src="assets/js/sheets.js"></script>
+<script defer src="assets/js/app-quiz.js"></script>
+<!-- Watchdog: quiz.html and glossary.html draw their whole contents with
+     JavaScript, so if a script fails to load — a blocked CDN, a locked-down
+     in-app browser, a dropped connection — the visitor gets a blank page and
+     no idea why. This inline block is the only code guaranteed to run, so it
+     watches the container and puts a readable message there instead.
+     It cancels itself as soon as real content appears. -->
+<script>
+(function(){
+  var TARGET = '#quiz-app';
+  var failed = null;
+  window.addEventListener('error', function (e) {
+    if (!failed) failed = (e && e.message) || 'script error';
+  }, true);
+
+  function rescue(){
+    var host = document.querySelector(TARGET);
+    if (!host) return;
+    // real content rendered? then there is nothing to do
+    if (host.querySelector('section, article, .gloss-card, .pq-card, .run')) return;
+
+    var ar = document.documentElement.getAttribute('lang') !== 'en';
+    host.innerHTML =
+      '<div style="max-width:520px;margin:14vh auto;padding:26px;text-align:center;' +
+      'font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#cfc7ea">' +
+      '<h1 style="font-size:20px;margin-bottom:12px;color:#fff">' +
+      (ar ? 'تعذّر تحميل هذه الصفحة' : 'This page could not load') + '</h1>' +
+      '<p style="font-size:14px;line-height:1.9;margin-bottom:18px">' +
+      (ar ? 'بعض المتصفحات داخل التطبيقات (فيسبوك، إنستغرام) تمنع تحميل ملفات الصفحة. افتح الرابط في متصفحك العادي.'
+          : 'Some in-app browsers (Facebook, Instagram) block the files this page needs. Open the link in your normal browser.') +
+      '</p>' +
+      '<p style="margin-bottom:18px"><a href="index.html" style="color:#c4b5fd;font-weight:700">' +
+      (ar ? 'العودة للرئيسية' : 'Back to home') + '</a></p>' +
+      '<button onclick="location.reload()" style="padding:11px 22px;border-radius:12px;border:0;' +
+      'background:#7c3aed;color:#fff;font-weight:700;cursor:pointer">' +
+      (ar ? 'أعد المحاولة' : 'Try again') + '</button>' +
+      (failed ? '<p style="margin-top:20px;font-size:11px;color:#6f6690;font-family:monospace;' +
+                'word-break:break-all">' + String(failed).slice(0, 200) + '</p>' : '') +
+      '</div>';
+  }
+
+  // give the scripts a fair chance on a slow connection first
+  window.addEventListener('load', function () { setTimeout(rescue, 2500); });
+  setTimeout(rescue, 8000);
+})();
+</script>
+</body>
+</html>

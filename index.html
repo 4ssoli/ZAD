@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>زاد | ZAD — منصة تكنولوجيا المعلومات BTEC</title>
+<meta name="description" content="منصة زاد التعليمية: كل وحدات ومواد تخصص تكنولوجيا المعلومات Pearson BTEC International في مكان واحد، مرتّبة حسب مسارات التخصص، بواجهة عربية وإنجليزية.">
+<meta name="author" content="Rayan Assoli">
+<meta name="theme-color" content="#07050f">
+
+<!-- Boot: applies the saved theme and language BEFORE the first paint, so
+     moving between pages never flashes the wrong colours or flips direction.
+     Keep it inline and synchronous — an external file would load too late. -->
+<script>
+(function(){
+  try{
+    var d = document.documentElement;
+    var t = localStorage.getItem('zad-theme') === 'light' ? 'light' : 'dark';
+    var l = localStorage.getItem('zad-lang')  === 'en'    ? 'en'    : 'ar';
+    d.setAttribute('data-theme', t);
+    d.setAttribute('lang', l);
+    d.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', t === 'light' ? '#fdf8fb' : '#07050f');
+  }catch(e){ /* private mode: fall back to the markup defaults */ }
+})();
+</script>
+
+<!-- ========== Link preview (WhatsApp, Facebook, Instagram, X, Telegram) ==========
+     The card itself is assets/og-cover.jpg — redraw it with tools/make-og-card.ps1.
+     These URLs must stay absolute because crawlers do not run JavaScript. If the
+     site ever moves to a new address, update it here and in quiz.html,
+     glossary.html, signin.html and dashboard.html. ============================ -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="زاد · ZAD">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:locale:alternate" content="en_US">
+<link rel="canonical" href="https://zad-it.netlify.app/">
+<meta property="og:url" content="https://zad-it.netlify.app/">
+<meta property="og:title" content="زاد | ZAD — منصة تكنولوجيا المعلومات BTEC">
+<meta property="og:description" content="كل وحدات تخصص تكنولوجيا المعلومات BTEC في مكان واحد، مع اختبارات لكل مسار وحساب شخصي يحفظ تقدّمك.">
+<meta property="og:image" content="https://zad-it.netlify.app/assets/og-cover.jpg">
+<meta property="og:image:secure_url" content="https://zad-it.netlify.app/assets/og-cover.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="منصة زاد التعليمية — تخصص تكنولوجيا المعلومات IT BTEC">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="زاد | ZAD — منصة تكنولوجيا المعلومات BTEC">
+<meta name="twitter:description" content="كل وحدات تخصص تكنولوجيا المعلومات BTEC في مكان واحد، مع اختبارات لكل مسار.">
+<meta name="twitter:image" content="https://zad-it.netlify.app/assets/og-cover.jpg">
+<meta name="twitter:image:alt" content="منصة زاد التعليمية — IT BTEC">
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c3aed'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Arabic: Thmanyah Sans (community web build of خط ثمانية, jsDelivr).
+     Latin + mono stay on Google Fonts. Cairo is kept only as a fallback
+     name in the CSS stack, not downloaded. -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dawod/thmanyah-font-web/sans.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/zad.css">
+
+<!-- warm the next page so the first jump to it is instant too -->
+<link rel="prefetch" href="quiz.html">
+<link rel="prefetch" href="glossary.html">
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<header class="nav">
+  <a class="brand" href="index.html">
+    <div class="mark">Z</div>
+    <div>
+      <div class="brand-ar" data-ar-only>زاد</div>
+      <div class="brand-en">ZAD</div>
+    </div>
+  </a>
+
+  <nav class="nav-links" id="nav-links">
+    <a href="#about"   data-i18n="nav_about"></a>
+    <a href="#majors"  data-i18n="nav_majors"></a>
+    <a href="#courses" data-i18n="nav_courses"></a>
+    <a href="quiz.html"     data-i18n="nav_quiz"></a>
+    <a href="glossary.html" data-i18n="nav_glossary"></a>
+    <a href="#social"  data-i18n="nav_social"></a>
+    <!-- language picker: lives inside the burger menu on small screens -->
+    <div class="nav-menu-lang">
+      <span class="nml-label" data-i18n="nav_lang"></span>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang-btn="ar">AR</button>
+        <button type="button" data-lang-btn="en">EN</button>
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="nav-right">
+    <div class="lang-toggle nav-lang-desktop" role="group" aria-label="Language">
+      <button type="button" data-lang-btn="ar">AR</button>
+      <button type="button" data-lang-btn="en">EN</button>
+    </div>
+    <div data-auth-slot></div>
+    <button class="nav-burger" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu" data-i18n-attr="aria-label:nav_menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="pill"><span class="dot"></span><span data-i18n="hero_pill"></span></div>
+  <h1 data-i18n="hero_title"></h1>
+  <div class="en-mark">ZAD · IT&nbsp;BTEC</div>
+  <p class="sub" data-i18n="hero_sub"></p>
+
+  <div class="hero-cta">
+    <a href="#courses" class="btn btn-primary"><span data-i18n="hero_cta1"></span></a>
+    <a href="quiz.html?mode=placement" class="btn btn-ghost"><span data-i18n="hero_cta4"></span></a>
+    <a href="signin.html" class="btn btn-ghost" id="hero-cta2"><span data-i18n="hero_cta2"></span></a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat"><div class="num"><span data-count="17">0</span></div><div class="lbl" data-i18n="stat1"></div></div>
+    <div class="stat"><div class="num"><span data-count="9">0</span></div><div class="lbl" data-i18n="stat2"></div></div>
+    <div class="stat"><div class="num">AR / EN</div><div class="lbl" data-i18n="stat3"></div></div>
+    <div class="stat"><div class="num">BTEC</div><div class="lbl" data-i18n="stat4"></div></div>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <div class="mouse"></div>
+    <span data-i18n="scroll"></span>
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about">
+  <div class="section-head reveal">
+    <span class="eyebrow" data-i18n="about_eyebrow"></span>
+    <h2 class="gradient-text" data-i18n="about_title"></h2>
+    <p data-i18n="about_sub"></p>
+  </div>
+
+  <div class="wrap about-grid">
+    <div class="card edge-glow about-card reveal">
+      <h3 data-i18n="about_card_title"></h3>
+      <p data-i18n="about_card_body"></p>
+      <p style="margin-block-start:14px" data-i18n="about_card_body2"></p>
+      <div class="chips">
+        <span class="chip" data-i18n="chip1"></span>
+        <span class="chip" data-i18n="chip2"></span>
+        <span class="chip" data-i18n="chip3"></span>
+        <span class="chip" data-i18n="chip4"></span>
+        <span class="chip" data-i18n="chip5"></span>
+        <span class="chip" data-i18n="chip6"></span>
+        <span class="chip" data-i18n="chip7"></span>
+        <span class="chip" data-i18n="chip8"></span>
+      </div>
+    </div>
+
+    <div class="about-visual reveal" data-delay="2" aria-hidden="true">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ag" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#5b21b6"/>
+          </linearGradient>
+        </defs>
+        <circle cx="100" cy="100" r="72" fill="none" stroke="url(#ag)" stroke-width="1.3" opacity=".55"/>
+        <circle cx="100" cy="100" r="47" fill="none" stroke="url(#ag)" stroke-width="1.3" opacity=".8"/>
+        <polygon points="100,54 138,77 138,123 100,146 62,123 62,77" fill="none" stroke="#fff" stroke-width="2.2"/>
+        <text x="100" y="113" text-anchor="middle" font-family="Space Grotesk, sans-serif"
+              font-size="44" font-weight="700" fill="#fff">IT</text>
+        <circle cx="100" cy="28"  r="4" fill="#c4b5fd"/>
+        <circle cx="172" cy="100" r="4" fill="#c4b5fd"/>
+        <circle cx="100" cy="172" r="4" fill="#c4b5fd"/>
+        <circle cx="28"  cy="100" r="4" fill="#c4b5fd"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MAJORS / PATHWAYS ==================== -->
+<section id="majors">
+  <div class="section-head reveal">
+    <span class="eyebrow" data-i18n="majors_eyebrow"></span>
+    <h2 class="gradient-text" data-i18n="majors_title"></h2>
+    <p data-i18n="majors_sub"></p>
+  </div>
+  <div class="wrap majors-grid" id="majors-grid"></div>
+</section>
+
+<!-- ==================== STUDY TOOLS ==================== -->
+<section id="tools">
+  <div class="section-head reveal">
+    <span class="eyebrow" data-i18n="tools_eyebrow"></span>
+    <h2 class="gradient-text" data-i18n="tools_title"></h2>
+    <p data-i18n="tools_sub"></p>
+  </div>
+  <div class="wrap tools-grid" id="tools-grid"></div>
+</section>
+
+<!-- ==================== COURSES ==================== -->
+<section id="courses">
+  <div class="section-head reveal">
+    <span class="eyebrow" data-i18n="courses_eyebrow"></span>
+    <h2 class="gradient-text" data-i18n="courses_title"></h2>
+    <p data-i18n="courses_sub"></p>
+  </div>
+
+  <div class="wrap toolbar reveal">
+    <div class="search-box">
+      <span class="icon" id="search-icon"></span>
+      <label class="sr-only" for="unit-search">Search</label>
+      <input type="search" id="unit-search" autocomplete="off"
+             data-i18n-attr="placeholder:search_ph">
+    </div>
+    <div class="filter-bar" id="filter-bar">
+      <button type="button" class="active" data-filter="all"       data-i18n="filter_all"></button>
+      <button type="button"                data-filter="available" data-i18n="filter_available"></button>
+      <button type="button"                data-filter="soon"      data-i18n="filter_soon"></button>
+      <button type="button"                data-filter="saved"     data-i18n="filter_saved"></button>
+    </div>
+    <div class="filter-bar" id="major-filter-bar"></div>
+  </div>
+
+  <div class="wrap courses-grid" id="courses-grid"></div>
+</section>
+
+<!-- ==================== SOCIAL ==================== -->
+<section id="social">
+  <div class="section-head reveal">
+    <span class="eyebrow" data-i18n="social_eyebrow"></span>
+    <h2 class="gradient-text" data-i18n="social_title"></h2>
+    <p data-i18n="social_sub"></p>
+  </div>
+
+  <div class="owner-card reveal" id="owner-card"></div>
+  <div class="social-grid reveal" data-delay="2" id="social-grid"></div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer id="site-footer"></footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="assets/js/config.js"></script>
+<script defer src="assets/js/supabase.js"></script>
+<script defer src="assets/js/i18n.js"></script>
+<script defer src="assets/js/data.js"></script>
+<script defer src="assets/js/resources.js"></script>
+<script defer src="assets/js/stats.js"></script>
+<script defer src="assets/js/ui.js"></script>
+<script defer src="assets/js/auth.js"></script>
+<script defer src="assets/js/userdata.js"></script>
+<script defer src="assets/js/shell.js"></script>
+<script defer src="assets/js/sheets.js"></script>
+<script defer src="assets/js/app-home.js"></script>
+</body>
+</html>

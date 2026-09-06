@@ -1,0 +1,46 @@
+{
+  "name": "زاد · ZAD — IT BTEC",
+  "short_name": "زاد ZAD",
+  "description": "منصة زاد التعليمية: وحدات تخصص تكنولوجيا المعلومات BTEC، اختبارات لكل مسار، ومعجم مصطلحات بلغتين.",
+  "id": "/",
+  "start_url": "index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#07050f",
+  "theme_color": "#07050f",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["education"],
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "تحدي اليوم · Daily challenge",
+      "short_name": "تحدي اليوم",
+      "url": "quiz.html?mode=daily"
+    },
+    {
+      "name": "المعجم · Glossary",
+      "short_name": "المعجم",
+      "url": "glossary.html"
+    },
+    {
+      "name": "لوحتي · My dashboard",
+      "short_name": "لوحتي",
+      "url": "dashboard.html"
+    }
+  ]
+}

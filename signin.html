@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل الدخول | زاد ZAD</title>
+<meta name="description" content="سجّل دخولك أو أنشئ حسابًا مجانيًا على منصة زاد لحفظ وحداتك ومتابعة تقدّمك.">
+
+<!-- Link preview — card at assets/og-cover.jpg (see index.html for notes) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="زاد · ZAD">
+<meta property="og:locale" content="ar_AR">
+<link rel="canonical" href="https://zad-it.netlify.app/signin.html">
+<meta property="og:url" content="https://zad-it.netlify.app/signin.html">
+<meta property="og:title" content="أنشئ حسابك على زاد — IT BTEC">
+<meta property="og:description" content="حساب مجاني يحفظ وحداتك وتقدّمك وملاحظاتك ومواعيد تسليمك.">
+<meta property="og:image" content="https://zad-it.netlify.app/assets/og-cover.jpg">
+<meta property="og:image:secure_url" content="https://zad-it.netlify.app/assets/og-cover.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="منصة زاد التعليمية — IT BTEC">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zad-it.netlify.app/assets/og-cover.jpg">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07050f">
+
+<!-- Boot: applies the saved theme and language BEFORE the first paint, so
+     moving between pages never flashes the wrong colours or flips direction.
+     Keep it inline and synchronous — an external file would load too late. -->
+<script>
+(function(){
+  try{
+    var d = document.documentElement;
+    var t = localStorage.getItem('zad-theme') === 'light' ? 'light' : 'dark';
+    var l = localStorage.getItem('zad-lang')  === 'en'    ? 'en'    : 'ar';
+    d.setAttribute('data-theme', t);
+    d.setAttribute('lang', l);
+    d.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', t === 'light' ? '#fdf8fb' : '#07050f');
+  }catch(e){ /* private mode: fall back to the markup defaults */ }
+})();
+</script>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c3aed'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' fill='white' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Arabic: Thmanyah Sans (community web build of خط ثمانية, jsDelivr).
+     Latin + mono stay on Google Fonts. Cairo is kept only as a fallback
+     name in the CSS stack, not downloaded. -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dawod/thmanyah-font-web/sans.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/zad.css">
+
+<!-- warm the next page so the first jump to it is instant too -->
+<link rel="prefetch" href="index.html">
+<link rel="prefetch" href="dashboard.html">
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<header class="nav">
+  <a class="brand" href="index.html">
+    <div class="mark">Z</div>
+    <div>
+      <div class="brand-ar" data-ar-only>زاد</div>
+      <div class="brand-en">ZAD</div>
+    </div>
+  </a>
+  <nav class="nav-links" id="nav-links">
+    <a href="index.html"          data-i18n="nav_home"></a>
+    <a href="index.html#majors"   data-i18n="nav_majors"></a>
+    <a href="index.html#courses"  data-i18n="nav_courses"></a>
+    <!-- language picker: lives inside the burger menu on small screens -->
+    <div class="nav-menu-lang">
+      <span class="nml-label" data-i18n="nav_lang"></span>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang-btn="ar">AR</button>
+        <button type="button" data-lang-btn="en">EN</button>
+      </div>
+    </div>
+
+  </nav>
+  <div class="nav-right">
+    <div class="lang-toggle nav-lang-desktop" role="group" aria-label="Language">
+      <button type="button" data-lang-btn="ar">AR</button>
+      <button type="button" data-lang-btn="en">EN</button>
+    </div>
+    <button class="nav-burger" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu" data-i18n-attr="aria-label:nav_menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ==================== AUTH ==================== -->
+<div class="auth-shell">
+
+  <!-- left / marketing panel -->
+  <aside class="auth-aside">
+    <div class="pill" style="align-self:flex-start">
+      <span class="dot"></span><span>ZAD · IT BTEC</span>
+    </div>
+    <h2 class="gradient-text" data-i18n="auth_aside_t"></h2>
+    <p data-i18n="auth_aside_p"></p>
+    <div class="auth-perks" id="auth-perks"></div>
+  </aside>
+
+  <!-- right / form panel -->
+  <main class="auth-main">
+    <div class="auth-card">
+
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" class="active" data-tab="signin" data-i18n="tab_signin"></button>
+        <button type="button" role="tab"                data-tab="signup" data-i18n="tab_signup"></button>
+      </div>
+
+      <div id="alert-slot"></div>
+
+      <!-- ---------- SIGN IN ---------- -->
+      <form id="form-signin" novalidate>
+        <h1 data-i18n="signin_h"></h1>
+        <p class="lede" data-i18n="signin_p"></p>
+
+        <div class="field">
+          <label for="si-email" data-i18n="f_email"></label>
+          <input class="input" type="email" id="si-email" autocomplete="email" required
+                 data-i18n-attr="placeholder:f_email_p">
+        </div>
+
+        <div class="field">
+          <label for="si-pw" data-i18n="f_password"></label>
+          <div class="pw-wrap">
+            <input class="input" type="password" id="si-pw" autocomplete="current-password" required
+                   data-i18n-attr="placeholder:f_password_p">
+            <button type="button" class="pw-toggle" data-pw-for="si-pw" aria-label="Show password"></button>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-block" type="submit" id="si-submit">
+          <span data-i18n="btn_signin"></span>
+        </button>
+
+        <p class="auth-foot">
+          <a href="#" id="forgot-link" data-i18n="forgot"></a>
+        </p>
+        <p class="auth-foot">
+          <span data-i18n="no_acc"></span>
+          <a href="#" data-goto="signup" data-i18n="tab_signup"></a>
+        </p>
+      </form>
+
+      <!-- ---------- SIGN UP ---------- -->
+      <form id="form-signup" novalidate hidden>
+        <h1 data-i18n="signup_h"></h1>
+        <p class="lede" data-i18n="signup_p"></p>
+
+        <div class="steps" id="steps">
+          <div class="step-dot active" data-step="1"><span class="n">1</span><span class="bar"></span></div>
+          <div class="step-dot"        data-step="2"><span class="n">2</span><span class="bar"></span></div>
+          <div class="step-dot"        data-step="3"><span class="n">3</span><span class="bar"></span></div>
+        </div>
+
+        <!-- step 1 : account -->
+        <section class="step-panel active" data-panel="1">
+          <div class="step-title" data-i18n="step1_t"></div>
+          <div class="step-sub"   data-i18n="step1_s"></div>
+
+          <div class="field">
+            <label for="su-name" data-i18n="f_fullname"></label>
+            <input class="input" type="text" id="su-name" autocomplete="name"
+                   data-i18n-attr="placeholder:f_fullname_p">
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="su-username" data-i18n="f_username"></label>
+              <input class="input" type="text" id="su-username" autocomplete="username"
+                     data-i18n-attr="placeholder:f_username_p">
+            </div>
+            <div class="field">
+              <label for="su-email">
+                <span data-i18n="f_email"></span><span class="req">*</span>
+              </label>
+              <input class="input" type="email" id="su-email" autocomplete="email" required
+                     data-i18n-attr="placeholder:f_email_p">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="su-pw">
+              <span data-i18n="f_password"></span><span class="req">*</span>
+            </label>
+            <div class="pw-wrap">
+              <input class="input" type="password" id="su-pw" autocomplete="new-password" required
+                     data-i18n-attr="placeholder:f_password_p">
+              <button type="button" class="pw-toggle" data-pw-for="su-pw" aria-label="Show password"></button>
+            </div>
+            <div class="pw-meter" id="pw-meter" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          </div>
+
+          <div class="step-nav">
+            <button type="button" class="btn btn-primary btn-block" data-next="2">
+              <span data-i18n="btn_next"></span>
+            </button>
+          </div>
+        </section>
+
+        <!-- step 2 : who are you -->
+        <section class="step-panel" data-panel="2">
+          <div class="step-title" data-i18n="step2_t"></div>
+          <div class="step-sub"   data-i18n="step2_s"></div>
+
+          <div class="field">
+            <label data-i18n="f_role"></label>
+            <div class="choice-grid" id="role-grid"></div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="su-level" data-i18n="f_level"></label>
+              <select class="select" id="su-level"></select>
+            </div>
+            <div class="field">
+              <label for="su-year" data-i18n="f_year"></label>
+              <select class="select" id="su-year"></select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="su-school">
+                <span data-i18n="f_school"></span>
+                <span class="hint">(<span data-i18n="f_optional"></span>)</span>
+              </label>
+              <input class="input" type="text" id="su-school"
+                     data-i18n-attr="placeholder:f_school_p">
+            </div>
+            <div class="field">
+              <label for="su-country" data-i18n="f_country"></label>
+              <select class="select" id="su-country"></select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label data-i18n="f_lang"></label>
+            <div class="chip-select">
+              <label class="chip-opt">
+                <input type="radio" name="su-lang" value="ar" checked><span>العربية</span>
+              </label>
+              <label class="chip-opt">
+                <input type="radio" name="su-lang" value="en"><span>English</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="step-nav">
+            <button type="button" class="btn btn-ghost" data-prev="1"><span data-i18n="btn_back"></span></button>
+            <button type="button" class="btn btn-primary" style="flex:1" data-next="3">
+              <span data-i18n="btn_next"></span>
+            </button>
+          </div>
+        </section>
+
+        <!-- step 3 : pathway + interests -->
+        <section class="step-panel" data-panel="3">
+          <div class="step-title" data-i18n="step3_t"></div>
+          <div class="step-sub"   data-i18n="step3_s"></div>
+
+          <div class="field">
+            <label for="su-major" data-i18n="f_major"></label>
+            <select class="select" id="su-major"></select>
+          </div>
+
+          <div class="field">
+            <label data-i18n="f_interests"></label>
+            <div class="chip-select" id="interests-grid"></div>
+          </div>
+
+          <div class="step-nav">
+            <button type="button" class="btn btn-ghost" data-prev="2"><span data-i18n="btn_back"></span></button>
+            <button type="submit" class="btn btn-primary" style="flex:1" id="su-submit">
+              <span data-i18n="btn_signup"></span>
+            </button>
+          </div>
+        </section>
+
+        <p class="auth-foot">
+          <span data-i18n="have_acc"></span>
+          <a href="#" data-goto="signin" data-i18n="tab_signin"></a>
+        </p>
+      </form>
+
+    </div>
+  </main>
+</div>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="assets/js/config.js"></script>
+<script defer src="assets/js/supabase.js"></script>
+<script defer src="assets/js/i18n.js"></script>
+<script defer src="assets/js/data.js"></script>
+<script defer src="assets/js/stats.js"></script>
+<script defer src="assets/js/ui.js"></script>
+<script defer src="assets/js/auth.js"></script>
+<script defer src="assets/js/userdata.js"></script>
+<script defer src="assets/js/shell.js"></script>
+<script defer src="assets/js/app-signin.js"></script>
+</body>
+</html>
